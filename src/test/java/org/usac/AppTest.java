@@ -2,25 +2,21 @@ package org.usac;
 
 import org.junit.Test;
 
+import static org.usac.App.binary;
+
 /**
  * Unit test for simple App.
  */
-public class AppTest{
+public class AppTest {
 
 	@Test
-	public void test() {
-		binary(1234);
-
+	public void testBinary() {
+		System.out.println(binary(0));
+		System.out.println(binary(1));
+		System.out.println(binary(4));
+		System.out.println(binary(5));
+		System.out.println(binary(7));
+		Integer.toBinaryString(1);
 	}
 
-	void binary(int a) {
-		StringBuilder stringBuilder = new StringBuilder("");
-		while (a >= 0) {
-			int remainder = a % 2;
-			stringBuilder.insert(0, remainder);
-			a = a >> 1;
-		}
-		stringBuilder.insert(0, a);
-		System.out.println(stringBuilder.toString());
-	}
 }
