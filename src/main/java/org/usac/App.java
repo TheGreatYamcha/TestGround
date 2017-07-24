@@ -21,4 +21,16 @@ public class App
 		stringBuilder.insert(0, a);
 		return stringBuilder.toString();
 	}
+
+	static boolean armstrong(int num) {
+    	int cubeSum = 0;
+		int digit = num % 10;
+		cubeSum = (int) Math.pow(digit, 3);
+		return cubeSum == num;
+		// take a digit from the left
+		// cube it
+		// add it to result
+		// repeat until no more digits left
+		// return if result == num
+	}
 }
