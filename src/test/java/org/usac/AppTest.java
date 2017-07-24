@@ -1,13 +1,27 @@
 package org.usac;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-import static org.usac.App.binary;
+import static org.usac.App.*;
 
 /**
  * Unit test for simple App.
  */
 public class AppTest {
+
+	@Test
+	public void testArmstrong() throws Exception {
+		Assert.assertTrue(armstrong(0));
+		Assert.assertTrue(armstrong(1));
+		Assert.assertFalse(armstrong(10));
+		Assert.assertTrue(armstrong(371));
+	}
+
+	@Test
+	public void testRemoveInForloop() throws Exception {
+		Assert.assertTrue(removeInForloop().isEmpty());
+	}
 
 	@Test
 	public void testBinary() {
