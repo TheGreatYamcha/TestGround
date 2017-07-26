@@ -25,18 +25,23 @@ public class App {
 	}
 
 	static List<String> removeInForloop() {
-//		List<String> nums = Arrays.asList("1", "2", "3");
+		//		List<String> nums = Arrays.asList("1", "2", "3");
 		List<String> nums = new LinkedList<>();
 		nums.add("1");
 		nums.add("2");
 		nums.add("3");
-//		for (String num : nums) {
-//			nums.remove(num);
-//		}
+		//		for (String num : nums) {
+		//			nums.remove(num);
+		//		}
 		for (Iterator<String> iterator = nums.iterator(); iterator.hasNext(); ) {
 			String next = iterator.next();
-			iterator.remove();
+//			nums.remove(next);
+			iterator.remove(); //iterator.remove only safe way to remove
 		}
+		//ListIterator<E> listIterator(int index)
+		//Returns a list iterator over the elements in this list (in proper sequence),
+		// starting at the specified position in the list. The specified index indicates the first element that would be returned by an initial call to next.
+		// An initial call to previous would return the element with the specified index minus one.
 		return nums;
 	}
 
