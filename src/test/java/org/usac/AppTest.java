@@ -3,12 +3,18 @@ package org.usac;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.usac.App.*;
 
 /**
  * Unit test for simple App.
  */
 public class AppTest {
+	@Test
+	public void testPrintSquare() throws Exception {
+		printSquare(Arrays.asList("Hello", "World", "in", "a", "frame"));
+	}
 
 	@Test
 	public void testArmstrong() throws Exception {

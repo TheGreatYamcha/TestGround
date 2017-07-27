@@ -1,5 +1,6 @@
 package org.usac;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -51,6 +52,44 @@ public class App {
 			cubeSum += (int) Math.pow(digit, 3);
 		}
 		return cubeSum == num;
+	}
+
+	/**
+	 * a function that takes a list of strings an prints them, one per line, in a rectangular frame.
+	 * For example the list ["Hello", "World", "in", "a", "frame"] gets printed as:
+	 * <p>
+	 * *********
+	 * * Hello *
+	 * * World *
+	 * * in    *
+	 * * a     *
+	 * * frame *
+	 * *********
+	 */
+	static void printSquare(List<String> words) {
+		List<String> lines = new LinkedList<>();
+		int maxLength = words.stream().mapToInt(String::length).max().getAsInt();
+		for (String word : words) {
+			if (word.length() > maxLength) maxLength = word.length();
+		}
+		for (String word : words) {
+			String line = "* " + word;
+			while (line.length() < maxLength + 2) {
+				line +=" ";
+			}
+			line += " *";
+			lines.add(line);
+		}
+		StringBuilder header = new StringBuilder();
+		for (int i = 0; i < lines.get(0).length(); i++) {
+			header.append("*");
+		}
+		lines.add(0, header.toString());
+		lines.add(header.toString());
+		for (String line :
+				lines) {
+			System.out.println(line);
+		}
 	}
 
 	private static List<Integer> digitize(int num) {
