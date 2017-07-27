@@ -3,17 +3,28 @@ package org.usac;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
+import static java.util.Arrays.asList;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 import static org.usac.App.*;
 
 /**
  * Unit test for simple App.
  */
 public class AppTest {
+
+	@Test
+	public void testRotateList() throws Exception {
+//		assertThat(rotateList(new LinkedList<>(asList("1","2","3","4","5","6")),2), is(asList("3","4","5","6","1","2")));
+
+		assertThat(rotateList(new ArrayList<>(asList("1","2","3","4","5","6")),2), is(asList("3","4","5","6","1","2")));
+	}
+
 	@Test
 	public void testPrintSquare() throws Exception {
-		printSquare(Arrays.asList("Hello", "World", "in", "a", "frame"));
+		printSquare(asList("Hello", "World", "in", "a", "frame"));
 	}
 
 	@Test

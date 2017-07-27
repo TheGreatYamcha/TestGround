@@ -1,9 +1,9 @@
 package org.usac;
 
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Hello world
@@ -12,6 +12,24 @@ public class App {
 
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
+	}
+
+	/**
+	 * Write a function that rotates a list by k elements. For example [1,2,3,4,5,6] rotated by two becomes [3,4,5,6,1,2]
+	 */
+	static <T> List<T> rotateList(List<T> list, int k) {
+//		for (int i = 0; i < k; i++) {
+//			T leftMostElement = list.remove(0);
+//			list.add(leftMostElement);
+//		}
+		while(--k >= 0) {
+			ListIterator<T> listIterator = list.listIterator();
+			T next = listIterator.next();
+			listIterator.remove();
+			list.listIterator(list.size()).add(next); //!!! listIterator is from 0 to list.size()
+		}
+
+		return list;
 	}
 
 	static String binary(int a) {
@@ -36,7 +54,7 @@ public class App {
 		//		}
 		for (Iterator<String> iterator = nums.iterator(); iterator.hasNext(); ) {
 			String next = iterator.next();
-//			nums.remove(next);
+			//			nums.remove(next);
 			iterator.remove(); //iterator.remove only safe way to remove
 		}
 		//ListIterator<E> listIterator(int index)
@@ -70,12 +88,14 @@ public class App {
 		List<String> lines = new LinkedList<>();
 		int maxLength = words.stream().mapToInt(String::length).max().getAsInt();
 		for (String word : words) {
-			if (word.length() > maxLength) maxLength = word.length();
+			if (word.length() > maxLength) {
+				maxLength = word.length();
+			}
 		}
 		for (String word : words) {
 			String line = "* " + word;
 			while (line.length() < maxLength + 2) {
-				line +=" ";
+				line += " ";
 			}
 			line += " *";
 			lines.add(line);
@@ -86,8 +106,7 @@ public class App {
 		}
 		lines.add(0, header.toString());
 		lines.add(header.toString());
-		for (String line :
-				lines) {
+		for (String line : lines) {
 			System.out.println(line);
 		}
 	}
