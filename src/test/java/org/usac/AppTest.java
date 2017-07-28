@@ -17,8 +17,6 @@ public class AppTest {
 
 	@Test
 	public void testRotateList() throws Exception {
-//		assertThat(rotateList(new LinkedList<>(asList("1","2","3","4","5","6")),2), is(asList("3","4","5","6","1","2")));
-
 		assertThat(rotateList(new ArrayList<>(asList("1","2","3","4","5","6")),2), is(asList("3","4","5","6","1","2")));
 	}
 

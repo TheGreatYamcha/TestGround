@@ -15,6 +15,16 @@ public class App {
 	}
 
 	/**
+	 * Write a function that combines two lists by alternatingly taking elements, e.g. [a,b,c], [1,2,3] → [a,1,b,2,c,3].
+	 */
+	static void alternateCombine(List l1, List l2) {
+		for (ListIterator iterator = l1.listIterator(); iterator.hasNext(); ) {
+			Object next = iterator.next();
+
+		}
+	}
+
+	/**
 	 * Write a function that rotates a list by k elements. For example [1,2,3,4,5,6] rotated by two becomes [3,4,5,6,1,2]
 	 */
 	static <T> List<T> rotateList(List<T> list, int k) {
@@ -28,7 +38,6 @@ public class App {
 			listIterator.remove();
 			list.listIterator(list.size()).add(next); //!!! listIterator is from 0 to list.size()
 		}
-
 		return list;
 	}
 
