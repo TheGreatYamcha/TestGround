@@ -10,18 +10,15 @@ import java.util.ListIterator;
  */
 public class App {
 
-	public static void main(String[] args) {
-		System.out.println("Hello World!");
-	}
-
 	/**
 	 * Write a function that combines two lists by alternatingly taking elements, e.g. [a,b,c], [1,2,3] → [a,1,b,2,c,3].
 	 */
-	static void alternateCombine(List l1, List l2) {
-		for (ListIterator iterator = l1.listIterator(); iterator.hasNext(); ) {
-			Object next = iterator.next();
-
+	static <T> List<T> alternateCombine(List<T> l1, List<T> l2) {
+		for (ListIterator<T> iterator = l1.listIterator(), iterator2 = l2.listIterator(); iterator.hasNext(); ) {
+			iterator.next();
+			iterator.add(iterator2.next());
 		}
+		return l1;
 	}
 
 	/**

@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -14,6 +15,11 @@ import static org.usac.App.*;
  * Unit test for simple App.
  */
 public class AppTest {
+
+	@Test
+	public void testAlternateCombine() throws Exception {
+		assertThat(alternateCombine(newArrayList("1", "2", "3"), newArrayList("a", "b", "c")), is(asList("1", "a", "2", "b", "3" , "c")));
+	}
 
 	@Test
 	public void testRotateList() throws Exception {
