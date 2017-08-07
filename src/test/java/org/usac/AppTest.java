@@ -16,7 +16,12 @@ import static org.usac.App.*;
  */
 public class AppTest {
 
-	@Test
+	 @Test
+	 public void testPrintWeirdCombinations() throws Exception {
+		printWeirdCombinations();
+	 }
+
+	 @Test
 	public void testAlternateCombine() throws Exception {
 		assertThat(alternateCombine(newArrayList("1", "2", "3"), newArrayList("a", "b", "c")), is(asList("1", "a", "2", "b", "3" , "c")));
 	}
