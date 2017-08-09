@@ -2,10 +2,16 @@ package org.usac;
 
 import java.util.*;
 
-/**
- * Hello world
- */
 public class App {
+
+	 /**
+	  * a,b,c,d
+	  * b,c,d,a
+	  * d,c,b,a
+	  * @param letters a,b,c,d
+	  */
+	 static void permutate(String... letters) {
+	 }
 
 	 /**
 	  * Write a program that outputs all possibilities to put + or - or nothing between the numbers 1,2,…,9 (in this order) such that the result is 100.
