@@ -28,27 +28,15 @@ public class App {
 	}
 
 	private static void traverseCombination(ArrayList<String> digits, int offset, String currentExpression) {
-		if (offset == digits.size()) { //no more element remaining
-			// can't do offset++?
+		currentExpression = currentExpression + digits.get(offset++);
+		if (offset == digits.size()) { //no more elements remaining
 			evalExpression(currentExpression);
 		} else {
-			traverseCombination(digits, offset + 1, currentExpression + digits.get(offset) + "+");
-			traverseCombination(digits, offset + 1, currentExpression + digits.get(offset) + "-");
-			traverseCombination(digits, offset + 1, currentExpression + digits.get(offset) + "");
+			traverseCombination(digits, offset, currentExpression + "+");
+			traverseCombination(digits, offset, currentExpression + "-");
+			traverseCombination(digits, offset, currentExpression + "");
 		}
 
-		for (int i = 0; i < 9; i++) {
-			System.out.println("foo");
-		}
-
-	}
-
-	private static void recursiveFor(int i) {
-		if (i == 0) {
-			return;
-		}
-		System.out.println("foo");
-		recursiveFor(i--);
 	}
 
 	private static void evalExpression(String currentExpression) {
