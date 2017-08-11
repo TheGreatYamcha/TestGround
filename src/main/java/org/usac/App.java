@@ -36,7 +36,17 @@ public class App {
 			traverseCombination(digits, offset, currentExpression + "-");
 			traverseCombination(digits, offset, currentExpression + "");
 		}
+	}
 
+	private static void traverseCombination(ArrayList<String> digits, int offset, int currentSum) {
+		currentExpression = currentExpression + digits.get(offset++);
+		if (offset == digits.size()) { //no more elements remaining
+//			evalExpression(currentExpression);
+		} else {
+			traverseCombination(digits, offset, currentSum+);
+			traverseCombination(digits, offset, currentExpression + "-");
+			traverseCombination(digits, offset, currentExpression + "");
+		}
 	}
 
 	private static void evalExpression(String currentExpression) {
