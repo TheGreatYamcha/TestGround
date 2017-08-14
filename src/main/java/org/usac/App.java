@@ -38,14 +38,16 @@ public class App {
 		}
 	}
 
-	private static void traverseCombination(ArrayList<String> digits, int offset, int currentSum) {
-		currentExpression = currentExpression + digits.get(offset++);
+	private static void traverseCombination(ArrayList<String> digits, int offset, int currentSum, int lastNumber) {
+		int newSum = Integer.parseInt(currentSum + digits.get(offset++));
 		if (offset == digits.size()) { //no more elements remaining
-//			evalExpression(currentExpression);
+			if (newSum == 100) {
+				System.out.println("found");
+			}
 		} else {
-			traverseCombination(digits, offset, currentSum+);
-			traverseCombination(digits, offset, currentExpression + "-");
-			traverseCombination(digits, offset, currentExpression + "");
+			traverseCombination(digits, offset, newSum, lastNumber);
+//			traverseCombination(digits, offset, currentExpression + "-");
+//			traverseCombination(digits, offset, currentExpression + "");
 		}
 	}
 
