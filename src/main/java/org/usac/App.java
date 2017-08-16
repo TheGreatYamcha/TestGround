@@ -5,6 +5,35 @@ import java.util.*;
 @SuppressWarnings("WeakerAccess")
 public class App {
 
+	static void emulateRecursion() {
+		LinkedList<CallContext> callStack = new LinkedList<>();
+		int currentCallIndex = 0;
+		while (true) {
+			CallContext callContext = callStack.get(currentCallIndex);
+			Object[] args = callContext.args;
+			int arg = (int) args[0];
+
+			if (arg == 0 || arg == 1) {
+
+			} else {
+				int fib1, fib2;
+				switch (callContext.resumePoint) {
+					case 1: //calculate fib(n-1)
+						callStack.add(new CallContext(null, 2));
+						currentCallIndex++;
+						break;
+					case 2: //calculate fib(n-2)
+						break;
+					case 3:
+						// add the two
+						break;
+				}
+
+			}
+
+		}
+	}
+
 	/**
 	 * a,b,c,d
 	 * b,c,d,a
@@ -46,8 +75,8 @@ public class App {
 			}
 		} else {
 			traverseCombination(digits, offset, newSum, lastNumber);
-//			traverseCombination(digits, offset, currentExpression + "-");
-//			traverseCombination(digits, offset, currentExpression + "");
+			//			traverseCombination(digits, offset, currentExpression + "-");
+			//			traverseCombination(digits, offset, currentExpression + "");
 		}
 	}
 
@@ -169,5 +198,20 @@ public class App {
 			num = num / 10;
 		} while (num > 0);
 		return result;
+	}
+
+	static class CallContext {
+
+		public CallContext(Object[] args, int resumePoint) {
+			this.args = args;
+			this.resumePoint = resumePoint;
+		}
+
+		Object[] args;
+
+		Object $return;
+
+		int resumePoint;
+
 	}
 }
