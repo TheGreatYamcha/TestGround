@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static java.util.Arrays.asList;
@@ -16,19 +17,31 @@ import static org.usac.App.*;
  */
 public class AppTest {
 
-	 @Test
-	 public void testPrintWeirdCombinations() throws Exception {
-		printWeirdCombinations();
-	 }
+	@Test
+	public void testGenericsMakeClassesRedundant() throws Exception {
+		genericsMakeClassesRedundant(new ArrayList<>(Arrays.asList("asdf")));
+	}
 
-	 @Test
+	@Test
+	public void testEmulateRecursion() throws Exception {
+		System.out.println(fibonacci(5));
+	}
+
+	@Test
+	public void testPrintWeirdCombinations() throws Exception {
+		printWeirdCombinations();
+	}
+
+	@Test
 	public void testAlternateCombine() throws Exception {
-		assertThat(alternateCombine(newArrayList("1", "2", "3"), newArrayList("a", "b", "c")), is(asList("1", "a", "2", "b", "3" , "c")));
+		assertThat(alternateCombine(newArrayList("1", "2", "3"), newArrayList("a", "b", "c")),
+					is(asList("1", "a", "2", "b", "3", "c")));
 	}
 
 	@Test
 	public void testRotateList() throws Exception {
-		assertThat(rotateList(new ArrayList<>(asList("1","2","3","4","5","6")),2), is(asList("3","4","5","6","1","2")));
+		assertThat(rotateList(new ArrayList<>(asList("1", "2", "3", "4", "5", "6")), 2),
+					is(asList("3", "4", "5", "6", "1", "2")));
 	}
 
 	@Test
