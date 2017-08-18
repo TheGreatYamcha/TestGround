@@ -14,32 +14,33 @@ public class App {
 		LinkedList<CallContext> callStack = new LinkedList<>();
 		int currentCallIndex = 0;
 		callStack.add(new CallContext(new Object[]{fibNumber}));
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < fibNumber; i++) {
 			callStack.add(new CallContext(null));
 		}
 		while (currentCallIndex >= 0) {
 			CallContext callContext = callStack.get(currentCallIndex);
 			Object[] args = callContext.args;
-			int arg = (int) args[0];
 			//actual logic starts here
+			int arg = (int) args[0];
 			if (arg == 0 || arg == 1) {
 				callContext.$return = arg;
 				currentCallIndex--;
 			} else {
-				callContext.vars = new CallContext[2];//fib1, fib2;
 				switch (callContext.resumePoint) {
 					case 0: //calculate fib(n-1)
-						callStack.set(currentCallIndex + 1, new CallContext(new Object[]{arg - 1}, 1));
-						callContext.vars[0] = callStack.get(currentCallIndex + 1).$return;
+						callStack.set(currentCallIndex + 1, new CallContext(new Object[]{arg - 1}));
+						callContext.resumePoint++;
 						currentCallIndex++;
 						break;
 					case 1: //calculate fib(n-2)
-						callStack.set(currentCallIndex + 1, new CallContext(new Object[]{arg - 2}, 2));
-						callContext.vars[1] = callStack.get(currentCallIndex + 1).$return;
+						callContext.vars.add(callStack.get(currentCallIndex + 1).$return); //fib1
+						callStack.set(currentCallIndex + 1, new CallContext(new Object[]{arg - 2}));
+						callContext.resumePoint++;
 						currentCallIndex++;
 						break;
 					case 2: // fib(n-1) + fib(n-2)
-						callContext.$return = (int) callContext.vars[0] + (int) callContext.vars[1];
+						callContext.vars.add(callStack.get(currentCallIndex + 1).$return); //fib2
+						callContext.$return = (int) callContext.vars.get(0) + (int) callContext.vars.get(1);
 						currentCallIndex--;
 						break;
 				}
@@ -218,7 +219,7 @@ public class App {
 
 		Object[] args;
 
-		Object[] vars;
+		List<Object> vars = new LinkedList<>();
 
 		Object $return;
 
@@ -226,11 +227,6 @@ public class App {
 
 		public CallContext(Object[] args) {
 			this.args = args;
-		}
-
-		public CallContext(Object[] args, int resumePoint) {
-			this.args = args;
-			this.resumePoint = resumePoint;
 		}
 
 	}
