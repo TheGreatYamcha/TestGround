@@ -14,9 +14,6 @@ public class App {
 		LinkedList<CallContext> callStack = new LinkedList<>();
 		int currentCallIndex = 0;
 		callStack.add(new CallContext(new Object[]{fibNumber}));
-		for (int i = 0; i < fibNumber; i++) {
-			callStack.add(new CallContext(null));
-		}
 		while (currentCallIndex >= 0) {
 			CallContext callContext = callStack.get(currentCallIndex);
 			Object[] args = callContext.args;
@@ -28,18 +25,20 @@ public class App {
 			} else {
 				switch (callContext.resumePoint) {
 					case 0: //calculate fib(n-1)
-						callStack.set(currentCallIndex + 1, new CallContext(new Object[]{arg - 1}));
+						callStack.add(new CallContext(new Object[]{arg - 1}));
 						callContext.resumePoint++;
 						currentCallIndex++;
 						break;
 					case 1: //calculate fib(n-2)
 						callContext.vars.add(callStack.get(currentCallIndex + 1).$return); //fib1
-						callStack.set(currentCallIndex + 1, new CallContext(new Object[]{arg - 2}));
+						callStack.removeLast();
+						callStack.add(new CallContext(new Object[]{arg - 2}));
 						callContext.resumePoint++;
 						currentCallIndex++;
 						break;
 					case 2: // fib(n-1) + fib(n-2)
 						callContext.vars.add(callStack.get(currentCallIndex + 1).$return); //fib2
+						callStack.removeLast();
 						callContext.$return = (int) callContext.vars.get(0) + (int) callContext.vars.get(1);
 						currentCallIndex--;
 						break;

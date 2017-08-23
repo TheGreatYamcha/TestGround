@@ -24,7 +24,8 @@ public class AppTest {
 
 	@Test
 	public void testEmulateRecursion() throws Exception {
-		System.out.println(fibonacci(100));
+		assertThat(fibonacci(2), is(1));
+		assertThat(fibonacci(10), is(55));
 	}
 
 	@Test
