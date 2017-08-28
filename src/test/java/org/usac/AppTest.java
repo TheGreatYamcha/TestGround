@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static java.util.Arrays.asList;
@@ -48,6 +49,12 @@ public class AppTest {
 	@Test
 	public void testPrintSquare() throws Exception {
 		printSquare(asList("Hello", "World", "in", "a", "frame"));
+	}
+
+	@Test
+	public void testClassFromGeneric() throws Exception {
+		getInstanceOfT(new LinkedList<String>() {
+		});
 	}
 
 	@Test

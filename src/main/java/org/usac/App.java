@@ -1,5 +1,6 @@
 package org.usac;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.*;
 
 @SuppressWarnings("WeakerAccess")
@@ -56,6 +57,13 @@ public class App {
 	 * @param letters a,b,c,d
 	 */
 	static void permutate(String... letters) {
+	}
+
+	static <T> T getInstanceOfT(List<T> o) throws IllegalAccessException, InstantiationException {
+		LinkedList s = (LinkedList) o;
+		ParameterizedType genericSuperclass = (ParameterizedType) o.getClass().getGenericSuperclass();
+		Class<T> type = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
+		return type.newInstance();
 	}
 
 	/**
