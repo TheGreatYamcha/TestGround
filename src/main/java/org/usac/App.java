@@ -2,9 +2,47 @@ package org.usac;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @SuppressWarnings("WeakerAccess")
 public class App {
+
+	private static Logger logger = Logger.getLogger(App.class.getName());
+
+	static void parallelScatterGatherWithFutureTask() throws Exception {
+		ExecutorService executorService = Executors.newFixedThreadPool(10);
+		LinkedList<FutureTask<String>> futureTasks = new LinkedList<>();
+		for (int i = 0; i < 10; i++) {
+			int finalI = i;
+			FutureTask<String> task = new FutureTask<>(() -> generateTask(finalI));
+			futureTasks.add(task);
+			executorService.submit(task);
+		}
+		for (FutureTask<String> futureTask : futureTasks) {
+			logger.info(futureTask.get());
+		}
+	}
+
+	static void parallelScatterGather() throws Exception {
+		List<String> list =
+					IntStream.range(0, 10).parallel().boxed()
+								.map(App::generateTask)
+								.collect(Collectors.toList());
+		logger.info(list.toString());
+	}
+	private static String generateTask(int i) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
+		return i + "-" + "test";
+	}
 
 	static <T extends Collection<String>, K extends App> void genericsMakeClassesRedundant(T arg){
 		arg.add("asf");

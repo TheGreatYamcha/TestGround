@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Objects;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static java.util.Arrays.asList;
@@ -17,6 +18,26 @@ import static org.usac.App.*;
  * Unit test for simple App.
  */
 public class AppTest {
+
+	@Test
+	public void testParallelScatterGatherFutureTask() throws Exception{
+		parallelScatterGatherWithFutureTask();
+	}
+
+	@Test
+	public void testParallelScatterGather() throws Exception{
+		parallelScatterGather();
+	}
+
+
+	@Test
+	public void testStringIntern() throws Exception {
+		Assert.assertTrue("asdf" == "asd" + "f");
+		String f = "f";
+		Assert.assertTrue("asdf" != "asd" + f && Objects.equals("asdf", "asd" + f));
+		Assert.assertFalse("asdf" == "asd" + new String("f"));
+		Assert.assertTrue("asdf" == ("asd" + new String("f")).intern());
+	}
 
 	@Test
 	public void testGenericsMakeClassesRedundant() throws Exception {
