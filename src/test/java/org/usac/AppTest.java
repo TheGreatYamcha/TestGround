@@ -46,6 +46,7 @@ public class AppTest {
 
 	@Test
 	public void testEmulateRecursion() throws Exception {
+		assertThat(fibonacci(1), is(1));
 		assertThat(fibonacci(2), is(1));
 		assertThat(fibonacci(10), is(55));
 	}

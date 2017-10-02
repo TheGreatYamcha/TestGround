@@ -50,41 +50,38 @@ public class App {
 	}
 
 	static int fibonacci(int fibNumber) {
-		LinkedList<CallContext> callStack = new LinkedList<>();
-		int currentCallIndex = 0;
+		Deque<CallContext> callStack = new LinkedList<>();
 		callStack.add(new CallContext(new Object[]{fibNumber}));
-		while (currentCallIndex >= 0) {
-			CallContext callContext = callStack.get(currentCallIndex);
+		Object myReturn = null;
+		while (!callStack.isEmpty()) {
+			CallContext callContext = callStack.peekLast();
 			Object[] args = callContext.args;
 			//actual logic starts here
 			int arg = (int) args[0];
 			if (arg == 0 || arg == 1) {
-				callContext.$return = arg;
-				currentCallIndex--;
+				//callContext.$return = arg;
+				myReturn = arg;
+				callStack.removeLast();
 			} else {
 				switch (callContext.resumePoint) {
 					case 0: //calculate fib(n-1)
 						callStack.add(new CallContext(new Object[]{arg - 1}));
 						callContext.resumePoint++;
-						currentCallIndex++;
 						break;
 					case 1: //calculate fib(n-2)
-						callContext.vars.add(callStack.get(currentCallIndex + 1).$return); //fib1
-						callStack.removeLast();
+						callContext.vars.add(myReturn); //fib1
 						callStack.add(new CallContext(new Object[]{arg - 2}));
 						callContext.resumePoint++;
-						currentCallIndex++;
 						break;
 					case 2: // fib(n-1) + fib(n-2)
-						callContext.vars.add(callStack.get(currentCallIndex + 1).$return); //fib2
+						callContext.vars.add(myReturn); //fib2
+						myReturn = (int) callContext.vars.get(0) + (int) callContext.vars.get(1);
 						callStack.removeLast();
-						callContext.$return = (int) callContext.vars.get(0) + (int) callContext.vars.get(1);
-						currentCallIndex--;
 						break;
 				}
 			}
 		}
-		return (int) callStack.get(0).$return;
+		return (int) myReturn;
 	}
 
 	/**
