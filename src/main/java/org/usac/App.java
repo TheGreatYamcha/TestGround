@@ -52,15 +52,14 @@ public class App {
 	static int fibonacci(int fibNumber) {
 		Deque<CallContext> callStack = new LinkedList<>();
 		callStack.add(new CallContext(new Object[]{fibNumber}));
-		Object myReturn = null;
+		Object lastReturn = null; //value of last object returned (when stack frame was dropped)
 		while (!callStack.isEmpty()) {
 			CallContext callContext = callStack.peekLast();
 			Object[] args = callContext.args;
 			//actual logic starts here
 			int arg = (int) args[0];
 			if (arg == 0 || arg == 1) {
-				//callContext.$return = arg;
-				myReturn = arg;
+				lastReturn = arg;
 				callStack.removeLast();
 			} else {
 				switch (callContext.resumePoint) {
@@ -69,19 +68,19 @@ public class App {
 						callContext.resumePoint++;
 						break;
 					case 1: //calculate fib(n-2)
-						callContext.vars.add(myReturn); //fib1
+						callContext.vars.add(lastReturn); //fib1
 						callStack.add(new CallContext(new Object[]{arg - 2}));
 						callContext.resumePoint++;
 						break;
 					case 2: // fib(n-1) + fib(n-2)
-						callContext.vars.add(myReturn); //fib2
-						myReturn = (int) callContext.vars.get(0) + (int) callContext.vars.get(1);
+						callContext.vars.add(lastReturn); //fib2
+						lastReturn = (int) callContext.vars.get(0) + (int) callContext.vars.get(1);
 						callStack.removeLast();
 						break;
 				}
 			}
 		}
-		return (int) myReturn;
+		return (int) lastReturn;
 	}
 
 	/**
